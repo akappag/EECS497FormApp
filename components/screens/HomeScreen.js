@@ -45,6 +45,7 @@ const blackStyle = {
 
 export default class HomeScreen extends React.Component {
   views = [];
+  state = { boxStyles: [] };
 
   changeColor(key) {
     var stateCopy = Object.assign({}, this.state);
@@ -52,28 +53,30 @@ export default class HomeScreen extends React.Component {
     this.setState(stateCopy);
     console.log(this.state.boxStyles[key]);
     console.log(stateCopy.boxStyles[key]);
+    console.log(this.views[key]);
   }
 
   constructor(props) {
-    console.log("Called");
     super(props);
-    this.state = { boxStyles: [] };
     for (let i = 0; i < 99; i++) {
       this.state.boxStyles.push(true);
       this.views.push(
-        <TouchableOpacity key={i}  onPress={() => this.changeColor(i)}>
-          <View style={[styles.item, this.state.boxStyles[i] ? {backgroundColor: 'black'} : {backgroundColor: 'red'}]} />
-        </TouchableOpacity>
+          <View key={i}/>
       )
     }
+
+    this.renderItem = this.renderItem.bind(this);
 
   }
 
   renderItem(item) {
   	return (
-  		<View>
+      <TouchableOpacity onPress={() => this.changeColor(item["key"])}>
+  		<View style={this.state.boxStyles[item["key"]] ? blackStyle : redStyle }>
       {item}
   		</View>
+      </TouchableOpacity>
+
   	);
   }
 
@@ -89,7 +92,7 @@ export default class HomeScreen extends React.Component {
 }
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#33F1FF',
+    backgroundColor: '#fff',
   },
   container: {
     alignItems: 'center',
