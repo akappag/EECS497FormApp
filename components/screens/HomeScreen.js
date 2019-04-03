@@ -4,10 +4,15 @@ import {
   View,
   ScrollView,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Image,
+  Picker
 } from 'react-native'
 import { ScreenOrientation } from 'expo';
 import SquareGrid from "react-native-square-grid";
+import circle from '../../assets/circle.png'
+import plus from '../../assets/plus.png'
+import xcross from '../../assets/unchecked.png'
 
 var NUMBERS = [
 	"one",
@@ -28,12 +33,12 @@ const redStyle = {
   height: 50
 };
 
-const blackStyle = {
+const whiteStyle = {
   flex: 0,
-  backgroundColor: "black",
+  backgroundColor: "white",
   flexWrap: 'nowrap',
   borderWidth: 0.5,
-  borderColor: '#fff',
+  borderColor: '#000',
   width: 50,
   height: 50
 };
@@ -45,21 +50,51 @@ const blackStyle = {
 
 export default class HomeScreen extends React.Component {
   views = [];
-  state = { boxStyles: [] };
+  state = {
+    boxStyles: [],
+    symbol: 'reset'
+  };
 
-  changeColor(key) {
+  changeSymbol(key) {
     var stateCopy = Object.assign({}, this.state);
-    stateCopy.boxStyles[key] = !stateCopy.boxStyles[key] ;
+    stateCopy.boxStyles[key] = this.state.symbol;
     this.setState(stateCopy);
     console.log(this.state.boxStyles[key]);
     console.log(stateCopy.boxStyles[key]);
     console.log(this.views[key]);
   }
 
+  renderTile(symbolType){
+    if(symbolType == 'circle'){
+      return(
+        <Image
+          style={{width: 50, height: 50}}
+          source={circle}
+        />
+      );
+    } else if(symbolType == 'plus'){
+      return(
+        <Image
+          style={{width: 50, height: 50}}
+          source={plus}
+        />
+      );
+    } else if(symbolType == 'xcross'){
+      return(
+        <Image
+          style={{width: 50, height: 50}}
+          source={xcross}
+        />
+      );
+    } else {
+      return (<View />);
+    }
+  }
+
   constructor(props) {
     super(props);
     for (let i = 0; i < 99; i++) {
-      this.state.boxStyles.push(true);
+      this.state.boxStyles.push('reset');
       this.views.push(
           <View key={i}/>
       )
@@ -71,9 +106,9 @@ export default class HomeScreen extends React.Component {
 
   renderItem(item) {
   	return (
-      <TouchableOpacity onPress={() => this.changeColor(item["key"])}>
-  		<View style={this.state.boxStyles[item["key"]] ? blackStyle : redStyle }>
-      {item}
+      <TouchableOpacity onPress={() => this.changeSymbol(item["key"])}>
+  		<View style={whiteStyle}>
+        {this.renderTile(this.state.boxStyles[item["key"]])}
   		</View>
       </TouchableOpacity>
 
@@ -86,6 +121,17 @@ export default class HomeScreen extends React.Component {
         <View style={styles.container}>
           <SquareGrid rows={10} columns={10} items={this.views} renderItem={this.renderItem} />
         </View>
+        <Picker
+          selectedValue={this.state.symbol}
+          style={{height: 50, width: 200}}
+          onValueChange={(itemValue, itemIndex) =>
+            this.setState({symbol: itemValue})
+          }>
+          <Picker.Item label="Circle" value="circle" />
+          <Picker.Item label="Plus" value="plus" />
+          <Picker.Item label="X" value="xcross" />
+          <Picker.Item label="Reset" value="reset" />
+        </Picker>
       </ScrollView>
     )
   }
