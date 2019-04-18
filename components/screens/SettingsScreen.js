@@ -139,16 +139,17 @@ export default class SettingsScreen extends React.Component {
                       {
                         justifyContent: 'center',
                         alignItems: 'center',
-                        paddingBottom: 100
+                        paddingBottom: 10
                       }
                     }
                    />
-                  <TouchableOpacity
+                   <TouchableOpacity
                     style={
                       [styles.buttonStyle,
                         {
                           flexDirection: 'row',
-                          justifyContent: 'center'
+                          justifyContent: 'center',
+                          marginBottom: 30
                         }
                       ]
                     }
