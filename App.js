@@ -16,7 +16,6 @@ import SignUpScreen from './components/screens/SignUpScreen'
 import SignInScreen from './components/screens/SignInScreen'
 import ForgetPasswordScreen from './components/screens/ForgetPasswordScreen'
 import HomeScreen from './components/screens/HomeScreen'
-import ProfileScreen from './components/screens/ProfileScreen'
 import SettingsScreen from './components/screens/SettingsScreen'
 
 Amplify.configure(awsmobile);
@@ -54,9 +53,6 @@ const AppTabNavigator = createBottomTabNavigator({
   Home: {
     screen: HomeScreen
   },
-  Profile: {
-    screen: ProfileScreen
-  },
   Settings: {
     screen: SettingsScreen
   },
@@ -90,7 +86,6 @@ const AppStackNavigator = createStackNavigator({
 const AppDrawerNavigator = createDrawerNavigator({
   Tabs: AppStackNavigator,
   Home: HomeScreen,
-  Profile: ProfileScreen,
   Settings: SettingsScreen
 })
 

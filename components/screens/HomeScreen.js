@@ -68,21 +68,21 @@ export default class HomeScreen extends React.Component {
     if(symbolType == 'circle'){
       return(
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.item}
           source={circle}
         />
       );
     } else if(symbolType == 'plus'){
       return(
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.item}
           source={plus}
         />
       );
     } else if(symbolType == 'xcross'){
       return(
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.item}
           source={xcross}
         />
       );
@@ -147,21 +147,7 @@ const styles = StyleSheet.create({
     height: 500,
   },
   item: {
-		flex: 0,
-    backgroundColor: "red",
-    flexWrap: 'nowrap',
-    borderWidth: 0.5,
-    borderColor: '#fff',
-    width: 50,
-    height: 50
-	},
-  touchItem: {
-    flex: 0,
-    backgroundColor: "black",
-    flexWrap: 'nowrap',
-    borderWidth: 0.5,
-    borderColor: '#fff',
-    width: 50,
-    height: 50
-  }
+    width: 40,
+    height: 40
+	}
 })
