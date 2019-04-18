@@ -33,22 +33,7 @@ const redStyle = {
   height: 50
 };
 
-const whiteStyle = {
-  flex: 0,
-  backgroundColor: "white",
-  flexWrap: 'nowrap',
-  borderWidth: 0.5,
-  borderColor: '#000',
-  width: 50,
-  height: 50
-};
-
-
-
-
-
-
-export default class HomeScreen extends React.Component {
+export default class FormationScreen extends React.Component {
   views = [];
   state = {
     boxStyles: [],
@@ -68,21 +53,21 @@ export default class HomeScreen extends React.Component {
     if(symbolType == 'circle'){
       return(
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.item}
           source={circle}
         />
       );
     } else if(symbolType == 'plus'){
       return(
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.item}
           source={plus}
         />
       );
     } else if(symbolType == 'xcross'){
       return(
         <Image
-          style={{width: 50, height: 50}}
+          style={styles.item}
           source={xcross}
         />
       );
@@ -107,7 +92,7 @@ export default class HomeScreen extends React.Component {
   renderItem(item) {
   	return (
       <TouchableOpacity onPress={() => this.changeSymbol(item["key"])}>
-  		<View style={whiteStyle}>
+  		<View style={styles.tile}>
         {this.renderTile(this.state.boxStyles[item["key"]])}
   		</View>
       </TouchableOpacity>
@@ -147,20 +132,16 @@ const styles = StyleSheet.create({
     height: 500,
   },
   item: {
-		flex: 0,
-    backgroundColor: "red",
-    flexWrap: 'nowrap',
-    borderWidth: 0.5,
-    borderColor: '#fff',
-    width: 50,
-    height: 50
+    width: 30,
+    height: 30,
+    alignItems: 'center'
 	},
-  touchItem: {
+  tile: {
     flex: 0,
-    backgroundColor: "black",
+    backgroundColor: "white",
     flexWrap: 'nowrap',
     borderWidth: 0.5,
-    borderColor: '#fff',
+    borderColor: '#000',
     width: 50,
     height: 50
   }
