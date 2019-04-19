@@ -1,5 +1,5 @@
 import React from 'react'
-import Amplify from 'aws-amplify';
+import Amplify, { API } from 'aws-amplify';
 import awsmobile from './aws-exports';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import {
