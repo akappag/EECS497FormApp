@@ -93,6 +93,11 @@ export default class FormationScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    const { navigation } = this.props;
+    const passedFormID = navigation.getParam('FormID', '');
+    const passedHeight = navigation.getParam('height', 0);
+    const passedWidth = navigation.getParam('width', 0);
+
     if (this.state.FormID == '') {
         for (let i = 0; i < 99; i++) {
           this.state.boxStyles.push('reset');

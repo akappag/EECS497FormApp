@@ -1,5 +1,5 @@
 import React from 'react';
-import Amplify from 'aws-amplify';
+import Amplify, { API } from 'aws-amplify';
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
@@ -7,8 +7,9 @@ import { Button, Input } from 'react-native-elements';
 export default class NewFormationScreen extends React.Component {
   state = {
     name: '',
-    length: 0,
+    height: 0,
     width: 0,
+    apiResponse: null
   }
 
   onChangeText(key, value) {
@@ -16,7 +17,48 @@ export default class NewFormationScreen extends React.Component {
   }
 
   createFormation = async () => {
-    console.log("Created formation")
+    await this.saveForm();
+    await this.getForm();
+    console.log(this.state.apiResponse)
+    console.log("Saved formation in database");
+    this.props.navigation.navigate('Formation', {
+        FormID: this.state.name,
+        height: this.state.height,
+        width: this.state.width
+    });
+  }
+
+  async saveForm() {
+    let newForm = {
+        body: {
+            'FormID': this.state.name,
+            'Height': this.state.height,
+            'Width': this.state.width,
+            'FormCoords': []
+        }
+    }
+    const path = '/Coordinates'
+
+    try {
+        const apiResponse = await API.put("CoordsCRUD", path, newForm)
+        console.log("response from saving form: ");
+        console.log(apiResponse);
+        this.setState({apiResponse});
+    } catch (e) {
+        console.log(e);
+    }
+  }
+
+  async getForm() {
+      const path = '/Coordinates/' + this.state.FormID;
+      try {
+        const apiResponse = await API.get("CoordsCRUD", path);
+        console.log("Response from getting Formation: ");
+        console.log(apiResponse);
+        this.setState({apiResponse});
+      } catch (e) {
+        console.log(e);
+      }
   }
 
   createFormationAlert = async () => {
@@ -49,14 +91,14 @@ export default class NewFormationScreen extends React.Component {
         />
         <Input
           style={styles.input}
-          placeholder='Length'
+          placeholder='Height'
           placeholderTextColor='#adb4bc'
           returnKeyType='go'
           autoCapitalize='none'
           autoCorrect={false}
           secureTextEntry={true}
           ref='SecondInput'
-          onChangeText={value => this.onChangeText('length', value)}
+          onChangeText={value => this.onChangeText('height', value)}
         />
         <Input
           style={styles.input}
