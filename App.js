@@ -17,6 +17,8 @@ import SignInScreen from './components/screens/SignInScreen'
 import ForgetPasswordScreen from './components/screens/ForgetPasswordScreen'
 import FormationScreen from './components/screens/FormationScreen'
 import SettingsScreen from './components/screens/SettingsScreen'
+import HomeScreen from './components/screens/HomeScreen'
+import NewFormationScreen from './components/screens/NewFormationScreen'
 
 Amplify.configure(awsmobile);
 
@@ -50,6 +52,9 @@ const AuthStackNavigator = createStackNavigator({
 })
 // App tabs located at the bottom of the screen
 const AppTabNavigator = createBottomTabNavigator({
+  Home: {
+    screen: HomeScreen
+  },
   Formation: {
     screen: FormationScreen
   },
@@ -85,6 +90,8 @@ const AppStackNavigator = createStackNavigator({
 // App stack for the drawer
 const AppDrawerNavigator = createDrawerNavigator({
   Tabs: AppStackNavigator,
+  Home: HomeScreen,
+  NewFormation: NewFormationScreen,
   Formation: FormationScreen,
   Settings: SettingsScreen
 })
