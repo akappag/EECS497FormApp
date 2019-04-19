@@ -53,6 +53,8 @@ export default class HomeScreen extends React.Component {
   state = {
     boxStyles: [],
     symbol: 'reset'
+    apiResponse: null,
+    FormID: ''
   };
 
   changeSymbol(key) {
@@ -62,7 +64,7 @@ export default class HomeScreen extends React.Component {
     console.log(this.state.boxStyles[key]);
     console.log(stateCopy.boxStyles[key]);
     console.log(this.views[key]);
-  }
+}
 
   renderTile(symbolType){
     if(symbolType == 'circle'){
