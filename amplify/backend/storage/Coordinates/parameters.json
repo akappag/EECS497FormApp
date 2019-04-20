@@ -1,0 +1,5 @@
+{
+    "tableName": "Coordinates",
+    "partitionKeyName": "FormID",
+    "partitionKeyType": "S"
+}

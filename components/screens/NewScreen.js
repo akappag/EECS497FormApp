@@ -36,12 +36,8 @@ const redStyle = {
 export default class FormationScreen extends React.Component {
   views = [];
   state = {
-    height: 0,
-    width: 0,
     boxStyles: [],
-    symbol: 'reset',
-    apiResponse: null,
-    FormID: ''
+    symbol: 'reset'
   };
 
   changeSymbol(key) {
@@ -80,41 +76,13 @@ export default class FormationScreen extends React.Component {
     }
   }
 
-  async getForm() {
-      const path = '/Coordinates/object/' + this.state.FormID;
-      try {
-        const apiResponse = await API.get("CoordsCRUD", path);
-        console.log("Response from getting Formation: " + apiResponse);
-        this.setState({apiResponse});
-      } catch (e) {
-        console.log(e);
-      }
-  }
-
   constructor(props) {
     super(props);
-    const { navigation } = this.props;
-    const passedFormID = navigation.getParam('FormID', '');
-    const passedHeight = navigation.getParam('height', 0);
-    const passedWidth = navigation.getParam('width', 0);
-
-    if (this.state.FormID == '') {
-        for (let i = 0; i < 99; i++) {
-          this.state.boxStyles.push('reset');
-          this.views.push(
-              <View key={i}/>
-          )
-        }
-    }
-    else {
-        getForm();
-        const height = 0, width = 0, boxStyles = [];
-        height = this.state.apiResponse['Height'];
-        width = this.state.apiResponse['Width'];
-        boxStyles = this.state.apiResponse['FormCoords'];
-        this.setState({height})
-        this.setState({width})
-        this.setState({boxStyles})
+    for (let i = 0; i < 200; i++) {
+      this.state.boxStyles.push('reset');
+      this.views.push(
+          <View key={i}/>
+      )
     }
 
     this.renderItem = this.renderItem.bind(this);
@@ -134,34 +102,34 @@ export default class FormationScreen extends React.Component {
 
   render() {
     return (
-      <ScrollView style={styles.screen}>
-        <View style={styles.container}>
-          <SquareGrid rows={10} columns={10} items={this.views} renderItem={this.renderItem} />
-        </View>
-        <Picker
-          selectedValue={this.state.symbol}
-          style={{height: 50, width: 200}}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({symbol: itemValue})
-          }>
-          <Picker.Item label="Circle" value="circle" />
-          <Picker.Item label="Plus" value="plus" />
-          <Picker.Item label="X" value="xcross" />
-          <Picker.Item label="Reset" value="reset" />
-        </Picker>
+      <ScrollView style={styles.screen} maximumZoomScale = {3} minimumZoomScale = {0} doAnimateZoomReset={false}>
+        <ScrollView horizontal={true} maximumZoomScale = {3} minimumZoomScale = {0}>
+            <View style={[styles.container, { height: 750, width: 500 }]}>
+              <SquareGrid rows={15} columns={10} items={this.views} renderItem={this.renderItem} />
+            </View>
+            <Picker
+              selectedValue={this.state.symbol}
+              style={{height: 50, width: 200}}
+              onValueChange={(itemValue, itemIndex) =>
+                this.setState({symbol: itemValue})
+              }>
+              <Picker.Item label="Circle" value="circle" />
+              <Picker.Item label="Plus" value="plus" />
+              <Picker.Item label="X" value="xcross" />
+              <Picker.Item label="Reset" value="reset" />
+            </Picker>
+        </ScrollView>
       </ScrollView>
     )
   }
 }
 const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   container: {
     alignItems: 'center',
-    justifyContent: 'center',
-    width: 500,
-    height: 500,
+    justifyContent: 'center'
   },
   item: {
     width: 30,

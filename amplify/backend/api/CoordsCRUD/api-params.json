@@ -1,0 +1,36 @@
+{
+    "paths": [
+        {
+            "name": "/Coordinates",
+            "lambdaFunction": "CoordsCRUD",
+            "privacy": {
+                "protected": true,
+                "auth": "rw",
+                "unauth": "r"
+            }
+        }
+    ],
+    "resourceName": "CoordsCRUD",
+    "apiName": "CoordsCRUD",
+    "functionArns": [
+        {
+            "lambdaFunction": "CoordsCRUD"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "formapp-20190319234737-authRole",
+        "unAuthRoleName": "formapp-20190319234737-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "CoordsCRUD",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

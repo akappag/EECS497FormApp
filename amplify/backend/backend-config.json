@@ -1,8 +1,54 @@
 {
 	"auth": {
+<<<<<<< HEAD
 		"cognito3691a52e": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation"
 		}
+=======
+		"cognito202cb437": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"storage": {
+		"Coordinates": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"function": {
+		"CoordsCRUD": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "Coordinates",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"api": {
+		"CoordsCRUD": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "CoordsCRUD",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		}
+>>>>>>> d0e5b4a7c01671fa283b47edc8b023874c7d2b92
 	}
 }
