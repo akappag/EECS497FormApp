@@ -1,0 +1,26 @@
+{
+    "formappenv": {
+        "awscloudformation": {
+            "AuthRoleName": "formapp-20190319234737-authRole",
+            "UnauthRoleArn": "arn:aws:iam::145884365428:role/formapp-20190319234737-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::145884365428:role/formapp-20190319234737-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "formapp-20190319234737-deployment",
+            "UnauthRoleName": "formapp-20190319234737-unauthRole",
+            "StackName": "formapp-20190319234737",
+            "StackId": "arn:aws:cloudformation:us-east-1:145884365428:stack/formapp-20190319234737/e7317600-4ac2-11e9-82e9-0efda143af08"
+        },
+        "categories": {
+            "auth": {
+                "cognito202cb437": {}
+            }
+        }
+    },
+    "dev": {
+        "categories": {
+            "auth": {
+                "cognito202cb437": {}
+            }
+        }
+    }
+}
