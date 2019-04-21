@@ -13,6 +13,8 @@ import {
   Modal,
   FlatList,
   Animated,
+  ImageBackground,
+  ScrollView
 } from 'react-native'
 
 import {
@@ -103,137 +105,144 @@ export default class SignUpScreen extends React.Component {
           style={styles.container}
           behavior='padding'
           enabled>
-          <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+          <ScrollView>
             <View style={styles.container}>
-              <Container style={styles.infoContainer}>
-                <View style={styles.container}>
-                  {/* username section  */}
-                  <Item rounded style={styles.itemStyle}>
-                    <Icon
-                      active
-                      name='person'
-                      style={styles.iconStyle}
-                    />
-                    <Input
-                      style={styles.input}
-                      placeholder='Username'
-                      placeholderTextColor='#adb4bc'
-                      keyboardType={'email-address'}
-                      returnKeyType='next'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      onSubmitEditing={(event) => {this.refs.SecondInput._root.focus()}}
-                      onChangeText={value => this.onChangeText('username', value)}
-                    />
-                  </Item>
-                  {/*  password section  */}
-                  <Item rounded style={styles.itemStyle}>
-                    <Icon
-                      active
-                      name='lock'
-                      style={styles.iconStyle}
-                    />
-                    <Input
-                      style={styles.input}
-                      placeholder='Password'
-                      placeholderTextColor='#adb4bc'
-                      returnKeyType='next'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      secureTextEntry={true}
-                      // ref={c => this.SecondInput = c}
-                      ref='SecondInput'
-                      onSubmitEditing={(event) => {this.refs.ThirdInput._root.focus()}}
-                      onChangeText={value => this.onChangeText('password', value)}
-                    />
-                  </Item>
-                  {/* email section */}
-                  <Item rounded style={styles.itemStyle}>
-                    <Icon
-                      active
-                      name='mail'
-                      style={styles.iconStyle}
-                    />
-                    <Input
-                      style={styles.input}
-                      placeholder='Email'
-                      placeholderTextColor='#adb4bc'
-                      keyboardType={'email-address'}
-                      returnKeyType='next'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      secureTextEntry={false}
-                      ref='ThirdInput'
-                      onSubmitEditing={(event) => {this.refs.FourthInput._root.focus()}}
-                      onChangeText={value => this.onChangeText('email', value)}
-                    />
-                  </Item>
-                  {/* phone section  */}
-                  <Item rounded style={styles.itemStyle}>
-                    <Icon
-                      active
-                      name='call'
-                      style={styles.iconStyle}
-                    />
-                    <Input
-                      style={styles.input}
-                      placeholder='+44766554433'
-                      placeholderTextColor='#adb4bc'
-                      keyboardType={'phone-pad'}
-                      returnKeyType='done'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      secureTextEntry={false}
-                      ref='FourthInput'
-                      value={this.state.phoneNumber}
-                      onChangeText={(val) => this.onChangeText('phoneNumber', val)}
-                    />
-                  </Item>
-                  {/* End of phone input */}
-                  <TouchableOpacity
-                    style={styles.buttonStyle}
-                    onPress={() => this.signUp()}>
-                    <Text style={styles.buttonText}>
-                      Sign Up
-                    </Text>
-                  </TouchableOpacity>
-                  {/* code confirmation section  */}
-                  <Item rounded style={styles.itemStyle}>
-                    <Icon
-                      active
-                      name='md-apps'
-                      style={styles.iconStyle}
-                    />
-                    <Input
-                      style={styles.input}
-                      placeholder='Confirmation code'
-                      placeholderTextColor='#adb4bc'
-                      keyboardType={'numeric'}
-                      returnKeyType='done'
-                      autoCapitalize='none'
-                      autoCorrect={false}
-                      secureTextEntry={false}
-                      onChangeText={value => this.onChangeText('authCode', value)}
-                    />
-                  </Item>
-                  <TouchableOpacity
-                    style={styles.buttonStyle}
-                    onPress={() => this.confirmSignUp()}>
-                    <Text style={styles.buttonText}>
-                      Confirm Sign Up
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.buttonStyle}
-                    onPress={() => this.resendSignUp()}>
-                    <Text style={styles.buttonText}>
-                      Resend code
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </Container>
+              <ImageBackground style={styles.backgroundImg} source={require('../../images/wilderness.jpg')} ></ImageBackground>
+              <View style={styles.newOverlay} >
+                <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+                  <View style={styles.container}>
+                    <Container style={styles.infoContainer}>
+                      <View style={styles.container}>
+                        {/* username section  */}
+                        <Item rounded style={styles.itemStyle}>
+                          <Icon
+                            active
+                            name='person'
+                            style={styles.iconStyle}
+                          />
+                          <Input
+                            style={styles.input}
+                            placeholder='Username'
+                            placeholderTextColor='#adb4bc'
+                            keyboardType={'email-address'}
+                            returnKeyType='next'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            onSubmitEditing={(event) => {this.refs.SecondInput._root.focus()}}
+                            onChangeText={value => this.onChangeText('username', value)}
+                          />
+                        </Item>
+                        {/*  password section  */}
+                        <Item rounded style={styles.itemStyle}>
+                          <Icon
+                            active
+                            name='lock'
+                            style={styles.iconStyle}
+                          />
+                          <Input
+                            style={styles.input}
+                            placeholder='Password'
+                            placeholderTextColor='#adb4bc'
+                            returnKeyType='next'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            secureTextEntry={true}
+                            // ref={c => this.SecondInput = c}
+                            ref='SecondInput'
+                            onSubmitEditing={(event) => {this.refs.ThirdInput._root.focus()}}
+                            onChangeText={value => this.onChangeText('password', value)}
+                          />
+                        </Item>
+                        {/* email section */}
+                        <Item rounded style={styles.itemStyle}>
+                          <Icon
+                            active
+                            name='mail'
+                            style={styles.iconStyle}
+                          />
+                          <Input
+                            style={styles.input}
+                            placeholder='Email'
+                            placeholderTextColor='#adb4bc'
+                            keyboardType={'email-address'}
+                            returnKeyType='next'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            secureTextEntry={false}
+                            ref='ThirdInput'
+                            onSubmitEditing={(event) => {this.refs.FourthInput._root.focus()}}
+                            onChangeText={value => this.onChangeText('email', value)}
+                          />
+                        </Item>
+                        {/* phone section  */}
+                        <Item rounded style={styles.itemStyle}>
+                          <Icon
+                            active
+                            name='call'
+                            style={styles.iconStyle}
+                          />
+                          <Input
+                            style={styles.input}
+                            placeholder='+44766554433'
+                            placeholderTextColor='#adb4bc'
+                            keyboardType={'phone-pad'}
+                            returnKeyType='done'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            secureTextEntry={false}
+                            ref='FourthInput'
+                            value={this.state.phoneNumber}
+                            onChangeText={(val) => this.onChangeText('phoneNumber', val)}
+                          />
+                        </Item>
+                        {/* End of phone input */}
+                        <TouchableOpacity
+                          style={styles.buttonStyle}
+                          onPress={() => this.signUp()}>
+                          <Text style={styles.buttonText}>
+                            Sign Up
+                          </Text>
+                        </TouchableOpacity>
+                        {/* code confirmation section  */}
+                        <Item rounded style={styles.itemStyle}>
+                          <Icon
+                            active
+                            name='md-apps'
+                            style={styles.iconStyle}
+                          />
+                          <Input
+                            style={styles.input}
+                            placeholder='Confirmation code'
+                            placeholderTextColor='#adb4bc'
+                            keyboardType={'numeric'}
+                            returnKeyType='done'
+                            autoCapitalize='none'
+                            autoCorrect={false}
+                            secureTextEntry={false}
+                            onChangeText={value => this.onChangeText('authCode', value)}
+                          />
+                        </Item>
+                        <TouchableOpacity
+                          style={styles.buttonStyle}
+                          onPress={() => this.confirmSignUp()}>
+                          <Text style={styles.buttonText}>
+                            Confirm Sign Up
+                          </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                          style={styles.buttonStyle}
+                          onPress={() => this.resendSignUp()}>
+                          <Text style={styles.buttonText}>
+                            Resend code
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </Container>
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
             </View>
-          </TouchableWithoutFeedback>
+          </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     )
@@ -244,34 +253,50 @@ export default class SignUpScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#33F1FF',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'transparent'
+  },
+  newOverlay: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,.6)'
+  },
+  backgroundImg: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: -1,
+    height: 800,
+    width: 600
   },
   input: {
     flex: 1,
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#5a52a5',
+    color: '#FFFFFF',
     height: 25 /*for some reason this fixs first input touch problem*/
   },
   infoContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    height: 370,
+    backgroundColor: 'transparent',
+    zIndex: 1,
+    flex: 1,
+    height: 800,
+    width: 400,
     bottom: 25,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 30,
-    backgroundColor: '#33F1FF',
   },
   itemStyle: {
     marginBottom: 10,
   },
   iconStyle: {
-    color: '#5a52a5',
+    color: '#FFFFFF',
     fontSize: 28,
     marginLeft: 15
   },

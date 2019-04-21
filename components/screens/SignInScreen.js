@@ -11,7 +11,8 @@ import {
   KeyboardAvoidingView,
   Keyboard,
   Alert,
-  Animated
+  Animated,
+  ImageBackground
 } from 'react-native'
 
 import {
@@ -55,57 +56,60 @@ export default class SignInScreen extends React.Component {
      <SafeAreaView style={styles.container}>
        <StatusBar/>
        <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
-         <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
-           <View style={styles.container}>
-             <Container style={styles.infoContainer}>
-               <View style={styles.container}>
-                 <Item rounded style={styles.itemStyle}>
-                   <Icon
-                     active
-                     name='person'
-                     style={styles.iconStyle}
-                   />
-                   <Input
-                     style={styles.input}
-                     placeholder='Username'
-                     placeholderTextColor='#adb4bc'
-                     keyboardType={'email-address'}
-                     returnKeyType='next'
-                     autoCapitalize='none'
-                     autoCorrect={false}
-                     onSubmitEditing={(event) => {this.refs.SecondInput._root.focus()}}
-                     onChangeText={value => this.onChangeText('username', value)}
-                   />
-                 </Item>
-                 <Item rounded style={styles.itemStyle}>
-                   <Icon
-                     active
-                     name='lock'
-                     style={styles.iconStyle}
-                   />
-                   <Input
-                     style={styles.input}
-                     placeholder='Password'
-                     placeholderTextColor='#adb4bc'
-                     returnKeyType='go'
-                     autoCapitalize='none'
-                     autoCorrect={false}
-                     secureTextEntry={true}
-                     ref='SecondInput'
-                     onChangeText={value => this.onChangeText('password', value)}
-                   />
-                 </Item>
-                 <TouchableOpacity
-                   onPress={() => this.signIn()}
-                   style={styles.buttonStyle}>
-                   <Text style={styles.buttonText}>
-                     Sign In
-                   </Text>
-                 </TouchableOpacity>
-               </View>
-             </Container>
-           </View>
-         </TouchableWithoutFeedback>
+       <ImageBackground style={styles.backgroundImg} source={require('../../images/wilderness.jpg')} ></ImageBackground>
+         <View style={styles.newOverlay} >
+           <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss}>
+             <View style={styles.container}>
+               <Container style={styles.infoContainer}>
+                 <View style={styles.container}>
+                   <Item rounded style={styles.itemStyle}>
+                     <Icon
+                       active
+                       name='person'
+                       style={styles.iconStyle}
+                     />
+                     <Input
+                       style={styles.input}
+                       placeholder='Username'
+                       placeholderTextColor='#adb4bc'
+                       keyboardType={'email-address'}
+                       returnKeyType='next'
+                       autoCapitalize='none'
+                       autoCorrect={false}
+                       onSubmitEditing={(event) => {this.refs.SecondInput._root.focus()}}
+                       onChangeText={value => this.onChangeText('username', value)}
+                     />
+                   </Item>
+                   <Item rounded style={styles.itemStyle}>
+                     <Icon
+                       active
+                       name='lock'
+                       style={styles.iconStyle}
+                     />
+                     <Input
+                       style={styles.input}
+                       placeholder='Password'
+                       placeholderTextColor='#adb4bc'
+                       returnKeyType='go'
+                       autoCapitalize='none'
+                       autoCorrect={false}
+                       secureTextEntry={true}
+                       ref='SecondInput'
+                       onChangeText={value => this.onChangeText('password', value)}
+                     />
+                   </Item>
+                   <TouchableOpacity
+                     onPress={() => this.signIn()}
+                     style={styles.buttonStyle}>
+                     <Text style={styles.buttonText}>
+                       Sign In
+                     </Text>
+                   </TouchableOpacity>
+                 </View>
+               </Container>
+             </View>
+           </TouchableWithoutFeedback>
+         </View>
        </KeyboardAvoidingView>
      </SafeAreaView>
    )
@@ -113,35 +117,48 @@ export default class SignInScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  backgroundImg: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    height: 800,
+    width: 600,
+  },
+  newOverlay: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,.3)'
+  },
   container: {
     flex: 1,
-    backgroundColor: '#33F1FF',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'transparent',
   },
   input: {
     flex: 1,
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#5a52a5',
+    color: '#FFFFFF',
   },
   infoContainer: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    height: 200,
+    backgroundColor: 'transparent',
+    width: 400,
+    height: 800,
     bottom: 25,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 30,
-    backgroundColor: '#33F1FF',
+    paddingHorizontal: 30
   },
   itemStyle: {
     marginBottom: 20,
   },
   iconStyle: {
-    color: '#5a52a5',
+    color: '#FFFFFF',
     fontSize: 28,
     marginLeft: 15
   },
